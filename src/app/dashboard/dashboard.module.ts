@@ -1,3 +1,4 @@
+
 import { LoggedInGuard } from './../auth/services/loggedin.guard';
 import { AuthenticationService } from './../auth/services/authentication.service';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,7 @@ import { DropdownModule } from 'ng2-bootstrap/dropdown';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HttpModule } from "@angular/http";
+import { ConfigService } from './../shared/services/config.service';
 
 @NgModule({
   imports: [
@@ -16,6 +18,6 @@ import { HttpModule } from "@angular/http";
     HttpModule
   ],
   declarations: [ DashboardComponent ],
-  providers: [AuthenticationService, LoggedInGuard]
+  providers: [AuthenticationService, LoggedInGuard, ConfigService]
 })
 export class DashboardModule { }

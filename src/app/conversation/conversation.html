@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-block">
+    <div>
+        <conversation-detail
+            (saved)="saveConversation($event)" (cancelled)="resetConversation($event)"
+            [conversation]="selectedConversation">Pick your Fancy:
+        </conversation-detail>
+    </div>
+    </div>
+    <div class="card-block">
+    <div>
+        <conversation-list [conversations]="conversations"
+            (selected)="selectConversation($event)" (deleted)="deleteConversation($event)">
+        </conversation-list>
+    </div>
+    </div>
+</div>

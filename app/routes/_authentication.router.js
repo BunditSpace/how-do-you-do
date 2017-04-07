@@ -28,7 +28,11 @@ import User from '../models/user.model.js';
 let ObjectId = require('mongoose').Types.ObjectId;
 
 export default (app, router, passport, auth, admin) => {
-
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
   // ### Authentication API Routes
 
   // Route to test if the user is logged in or not

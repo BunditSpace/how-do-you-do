@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { Conversation } from './conversation/conversation';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Layouts
@@ -37,6 +38,10 @@ export const routes: Routes = [
       {
         path: 'charts',
         loadChildren: './chartjs/chartjs.module#ChartJSModule'
+      },
+      {
+        path: 'conversation',
+        loadChildren: './conversation/conversation.module#ConversationModule'
       }
     ]
   },

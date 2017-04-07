@@ -1,7 +1,10 @@
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+
+import { ConfigService } from './../../shared/services/config.service';
 
 const HEADER = {
   headers: new Headers({
@@ -11,11 +14,16 @@ const HEADER = {
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http) { }
+
+    _baseUrl: string = '';
+    constructor(private http: Http, private config: ConfigService) 
+    {
+        this._baseUrl = config.getApiURI();
+    }
 
     login(username: string, password: string) {
         let user = { username: username, password: password };
-        return this.http.post('/api/auth/login', JSON.stringify(user), HEADER)
+        return this.http.post(this._baseUrl + '/api/auth/login', JSON.stringify(user), HEADER)
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let user = response.json();

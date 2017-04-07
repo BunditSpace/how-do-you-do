@@ -1,0 +1,73 @@
+<div class="card">
+  <div>
+    <h2 *ngIf="selectedConversation._id">Editing {{originalTitle}}</h2>
+    <h2 *ngIf="!selectedConversation._id">Create New Conversation</h2>
+  </div>
+  <div>
+    <form novalidate>
+        <div>
+          <label>create Date </label> {{ selectedConversation.date }}
+        </div>
+        <div>
+          <label>creator</label>
+          <input [(ngModel)]="selectedConversation.creator" placeholder="Enter a creator" type="text" />
+        </div>
+        <div>
+          <label>Talk with</label>
+          <input  [(ngModel)]="selectedConversation.talkwith" placeholder="Enter a talkwith" type="text"/>
+        </div>
+        <div>
+          <label>relationship</label>
+            <select [(ngModel)]="selectedConversation.relationship">
+                <option *ngFor="let relation of relationships" [value]="relation.name">
+                    {{relation.name}}
+                </option>
+            </select>
+        </div>
+
+        <div>
+          <label>topic</label>
+          <input [(ngModel)]="selectedConversation.topic"
+            placeholder="Enter a topic" type="text"/>
+        </div>
+        <div>
+          <label>question</label>
+          <input  [(ngModel)]="selectedConversation.question"
+            placeholder="Enter a question" type="text"  aria-multiline="true"/>
+
+        </div>
+        <div>
+          <label>answer</label>
+          <input placeholder="answer" [(ngModel)]="selectedConversation.answer"/>
+        </div>
+        <div>
+          <label>conversationtype</label>
+            <select  [(ngModel)]="selectedConversation.conversationtype">
+                <option *ngFor="let conversationtype of conversationtypes" [value]="conversationtype.name">
+                  {{conversationtype.name}}
+                </option>
+            </select>
+        </div>
+        <div>
+          <label>Rating</label>
+          <rating [interactive]="true" [rate]="selectedConversation.rating"
+            (updateRate)="onUpdateRating($event)"></rating>
+          <label>{{selectedConversation.rating}}</label>
+        </div>
+        <div>
+          <label>feeling</label>
+          <rating [interactive]="true" [rate]="selectedConversation.feeling"
+            (updateRate)="onUpdateFeeling($event)"></rating>
+          <label>{{selectedConversation.feeling}}</label>
+        </div>
+    </form>
+  </div>
+  <div>
+      <button  type="submit" (click)="cancelled.emit(selectedConversation)">
+        Cancel
+      </button>
+      <button  type="submit" (click)="saved.emit(selectedConversation)">
+        Save
+      </button>
+  </div>
+</div>
