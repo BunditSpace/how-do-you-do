@@ -2,10 +2,11 @@ import {Component,
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy} from '@angular/core';
+  ChangeDetectionStrategy, OnInit
+} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-
+import 'rxjs/add/operator/do';
 import { Conversation } from './conversation';
 import { ConversationService } from './services/conversation.service';
 import { ConversationDetail } from './conversation-detail.component';
@@ -14,25 +15,34 @@ import { ConversationList } from './conversation-list.component';
 
 @Component({
     selector: 'conversation',
-    providers: [],
+    providers: [ConversationService],
     templateUrl: './Conversation.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class Conversations {
+export class Conversations implements OnInit {
 
-  conversations: Observable<Array<Conversation>>;
+  conversations: Conversation[];
+  errorMessage: string;
 
   selectedConversation: Observable<Conversation>;
 
+  ngOnInit(){
+      this.loadConversations();
+      console.log('init '+this.conversations);
+  }
+
   constructor(private conversationService: ConversationService) 
   {
-    this.conversations = conversationService.conversations;
 
-    // DEBUG
-    this.selectedConversation.subscribe(v => console.log(v));
+  }
 
-    conversationService.loadConversations();
+  loadConversations()
+  {
+     this.conversationService.loadConversations()
+          .subscribe(conversation => this.conversations = conversation
+                     ,error => this.errorMessage = <any>error);
+                      console.log('loadddd '+this.conversations);
   }
 
   selectConversation(conversation: Conversation) {

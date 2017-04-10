@@ -8,6 +8,7 @@ import { Conversation } from './../conversation';
 import { ConfigService } from './../../shared/services/config.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
 const HEADER = {
   headers: new Headers({
     'Content-Type': 'application/json'
@@ -18,16 +19,14 @@ const HEADER = {
 export class ConversationService {
 
   _baseUrl: string;
-  conversations: Observable<Array<Conversation>>;
 
   constructor(private http: Http, private config: ConfigService) {
       this._baseUrl = config.getApiURI();
-    //this.conversations = store.select('conversations');
   }
 
-  loadConversations() {
-      this.http.get(this._baseUrl + '/api/conversation')
-          .map(res => res.json()).catch(this.handleError);
+  loadConversations(): Observable<Conversation[]>  {
+      return this.http.get(this._baseUrl + '/api/conversation')
+           .map(res => <Conversation[]>res.json()).do(data => console.log('All: ' +  JSON.stringify(data))).catch(this.handleError);
   }
 
   saveConversation(conversation: Conversation) {

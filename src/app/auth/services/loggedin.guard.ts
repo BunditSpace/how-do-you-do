@@ -10,16 +10,18 @@ export class LoggedInGuard implements CanActivate {
     }
 
   canActivate() {
-      if(this.user.isLoggedIn())
+      if(!this.user.isLoggedIn())
       {
-            this.router.navigate(['/charts']);
-            return true;
+            //this.router.navigate(['/charts']);
+            console.log(' not loggin');
+            this.router.navigate(['/pages/login']);
+            return false;
       }
-      else
-      {
-          this.router.navigate(['/pages/login']);
-      }
-    return false;
+      // else
+      // {
+      //     this.router.navigate(['/pages/login']);
+      // }
+    return true;
   }
 
 }

@@ -1,73 +1,138 @@
-<div class="card">
-  <div>
-    <h2 *ngIf="selectedConversation._id">Editing {{originalTitle}}</h2>
-    <h2 *ngIf="!selectedConversation._id">Create New Conversation</h2>
+<div>
+  <form>
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <strong *ngIf="selectedConversation._id">Editing {{originalTitle}}</strong>
+        <strong *ngIf="!selectedConversation._id">Create New Conversation</strong>
+        <small>Form</small>
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-sm-2">
+            <label for="createDate">Create Date</label>
+            <p class="form-control-static"> 01-01-2017</p>
+          </div>
+          <div class="form-group col-sm-10">
+            <label for="creator"> Creator </label>
+            <input type="text" class="form-control" id="creator" [(ngModel)]="selectedConversation.creator" name="creator" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-8">
+            <label for="city">Talk with</label>
+            <input type="text" class="form-control" id="talkwith" [(ngModel)]="selectedConversation.talkwith" name="talkwith" placeholder="Talk with">
+          </div>
+          <div class="form-group col-sm-4">
+            <label for="select">Relationship</label>
+              <div>
+                <select id="relationship" name="relationship" [(ngModel)]="selectedConversation.relationship" class="form-control input-lg" size="1">
+                  <option *ngFor="let relation of relationships" [value]="relation.name"> 
+                      {{relation.name}} 
+                  </option>
+                </select>
+              </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="topic">Topic</label>
+          <input type="text" class="form-control" id="topic" [(ngModel)]="selectedConversation.topic" name="topic" placeholder="topic">
+        </div>
+        <div class="form-group">
+          <label for="conversationType">Conversation Type</label>
+          <div>
+            <select id="conversationtype" name="conversationtype" [(ngModel)]="selectedConversation.conversationtype" class="form-control input-lg" size="1">
+                  <option *ngFor="let conversationtype of conversationtypes" [value]="conversationtype.name">
+                    {{conversationtype.name}}
+                  </option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="question">Question ? </label>
+            <textarea id="question" name="question" [(ngModel)]="selectedConversation.question" rows="9" class="form-control" placeholder="Question ...?"></textarea>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="answer">Answer </label>
+            <textarea id="answer" name="answer" [(ngModel)]="selectedConversation.answer" rows="9" class="form-control" placeholder="Answer ..."></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rating">Rating </label>
+          <rating [interactive]="true" [rate]="selectedConversation.rating" (updateRate)="onUpdateRating($event)"></rating>
+          <label>{{selectedConversation.rating}}</label>
+        </div>
+        <div class="form-group">
+          <label for="feeling">Feelig</label>
+          <rating [interactive]="true" [rate]="selectedConversation.feeling" (updateRate)="onUpdateFeeling($event)"></rating>
+          <label>{{selectedConversation.feeling}}</label>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-outline-danger" (click)="cancelled.emit(selectedConversation)"><i class="fa fa-rss"></i>&nbsp; Cancel</button>
+          <button type="submit" class="btn btn-outline-success" (click)="saved.emit(selectedConversation)"><i class="fa fa-magic"></i>&nbsp; Save</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <form novalidate>
-        <div>
-          <label>create Date </label> {{ selectedConversation.date }}
+  </form>
+  <!--<form novalidate>
+    <div>
+      <label>create Date </label> {{ selectedConversation.date }}
+    </div>
+    <div>
+      <label>creator</label>
+      <input [(ngModel)]="selectedConversation.creator" name="creator" placeholder="Enter a creator" type="text" />
+    </div>
+    <div>
+      <div class="form-group row">
+        <label class="col-md-1 form-control-label" for="text-input">Talk with</label>
+        <div class="col-md-5">
+          <input type="text" id="talkwith" name="talkwith" [(ngModel)]="selectedConversation.talkwith" name="talkwith" class="form-control"
+            placeholder="talkwith">
         </div>
-        <div>
-          <label>creator</label>
-          <input [(ngModel)]="selectedConversation.creator" placeholder="Enter a creator" type="text" />
-        </div>
-        <div>
-          <label>Talk with</label>
-          <input  [(ngModel)]="selectedConversation.talkwith" placeholder="Enter a talkwith" type="text"/>
-        </div>
-        <div>
-          <label>relationship</label>
-            <select [(ngModel)]="selectedConversation.relationship">
+      </div>
+    </div>
+    <div>
+      <label>relationship</label>
+      <select [(ngModel)]="selectedConversation.relationship" name="relationship">
                 <option *ngFor="let relation of relationships" [value]="relation.name">
                     {{relation.name}}
                 </option>
             </select>
-        </div>
+    </div>
 
-        <div>
-          <label>topic</label>
-          <input [(ngModel)]="selectedConversation.topic"
-            placeholder="Enter a topic" type="text"/>
-        </div>
-        <div>
-          <label>question</label>
-          <input  [(ngModel)]="selectedConversation.question"
-            placeholder="Enter a question" type="text"  aria-multiline="true"/>
+    <div>
+      <label>topic</label>
+      <input [(ngModel)]="selectedConversation.topic" name="topic" placeholder="Enter a topic" type="text" />
+    </div>
+    <div>
+      <label>question</label>
+      <input [(ngModel)]="selectedConversation.question" name="question" placeholder="Enter a question" type="text" aria-multiline="true"
+      />
 
-        </div>
-        <div>
-          <label>answer</label>
-          <input placeholder="answer" [(ngModel)]="selectedConversation.answer"/>
-        </div>
-        <div>
-          <label>conversationtype</label>
-            <select  [(ngModel)]="selectedConversation.conversationtype">
+    </div>
+    <div>
+      <label>answer</label>
+      <input placeholder="answer" [(ngModel)]="selectedConversation.answer" name="answer" />
+    </div>
+    <div>
+      <label>conversationtype</label>
+      <select [(ngModel)]="selectedConversation.conversationtype" name="conversationtype">
                 <option *ngFor="let conversationtype of conversationtypes" [value]="conversationtype.name">
                   {{conversationtype.name}}
                 </option>
             </select>
-        </div>
-        <div>
-          <label>Rating</label>
-          <rating [interactive]="true" [rate]="selectedConversation.rating"
-            (updateRate)="onUpdateRating($event)"></rating>
-          <label>{{selectedConversation.rating}}</label>
-        </div>
-        <div>
-          <label>feeling</label>
-          <rating [interactive]="true" [rate]="selectedConversation.feeling"
-            (updateRate)="onUpdateFeeling($event)"></rating>
-          <label>{{selectedConversation.feeling}}</label>
-        </div>
-    </form>
-  </div>
-  <div>
-      <button  type="submit" (click)="cancelled.emit(selectedConversation)">
-        Cancel
-      </button>
-      <button  type="submit" (click)="saved.emit(selectedConversation)">
-        Save
-      </button>
-  </div>
+    </div>
+    <div>
+      <label>Rating</label>
+      <rating [interactive]="true" [rate]="selectedConversation.rating" (updateRate)="onUpdateRating($event)"></rating>
+      <label>{{selectedConversation.rating}}</label>
+    </div>
+    <div>
+      <label>feeling</label>
+      <rating [interactive]="true" [rate]="selectedConversation.feeling" (updateRate)="onUpdateFeeling($event)"></rating>
+      <label>{{selectedConversation.feeling}}</label>
+    </div>
+  </form>-->
 </div>

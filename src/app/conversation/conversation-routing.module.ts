@@ -12,7 +12,16 @@ const routes: Routes = [
     data: {
       title: 'Conversation'
     },
-    canActivate:[LoggedInGuard]
+     canActivate:[LoggedInGuard]
+    // ,children: [
+    //   {
+    //     path: 'con',
+    //     component: Conversations,
+    //     data: {
+    //       title: 'Page 404'
+    //     }
+    //   }
+    // ]
   }
 ];
 

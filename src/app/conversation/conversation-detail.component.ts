@@ -1,12 +1,9 @@
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Directive } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import { ConversationService } from './services/conversation.service';
 import { Conversation } from './conversation' 
-
-import { Rating } from './../shared/rating.component';
-
 
 @Component({
     selector: 'conversation-detail',

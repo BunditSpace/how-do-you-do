@@ -1,3 +1,4 @@
+import { RatingComponent } from './../shared/rating.component';
 import {Component,
   Input,
   Output,
@@ -9,8 +10,6 @@ import {Observable} from 'rxjs/Observable';
 import { ConversationService } from './services/conversation.service';
 import { Conversation } from './conversation';
 
-
-import { Rating } from './../shared/rating.component';
 
 @Component({
   selector: 'conversation-list',
@@ -25,4 +24,9 @@ export class ConversationList {
   // Two event outputs for when a recipe is selected or deleted
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
+
+  constructor() 
+  {
+      console.log(' list '+this.conversations);
+  }
 }

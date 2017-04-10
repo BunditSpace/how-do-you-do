@@ -10,7 +10,7 @@ import {Component,
   templateUrl: './rating.html'
 })
 
-export class Rating {
+export class RatingComponent {
 
   @Input() rate: number;
 
