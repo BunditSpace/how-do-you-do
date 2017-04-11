@@ -47,4 +47,13 @@ export class AuthenticationService {
         else
             return false;
     }
+
+    getUserName()
+    {
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser)
+            return currentUser.local.username;
+        else
+            return "";
+    }
 }

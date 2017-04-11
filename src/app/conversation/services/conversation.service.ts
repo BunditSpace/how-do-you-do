@@ -9,6 +9,7 @@ import { ConfigService } from './../../shared/services/config.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
+
 const HEADER = {
   headers: new Headers({
     'Content-Type': 'application/json'
@@ -35,15 +36,17 @@ export class ConversationService {
 
   createConversation(conversation: Conversation) {
       this.http.post(this._baseUrl + '/api/conversation', JSON.stringify(conversation), HEADER)
-          .map(res => res.json()).catch(this.handleError);
+          .map(res => <Conversation>res.json()).catch(this.handleError).subscribe(data => console.log(data));
   }
 
   updateConversation(conversation: Conversation) {
-      this.http.put(this._baseUrl + `/api/conversation/${conversation._id}`, JSON.stringify(conversation), HEADER).catch(this.handleError);
+      this.http.put(this._baseUrl + '/api/conversation/'+ `${conversation._id}`, JSON.stringify(conversation), HEADER)
+         .map(res => res.json()).catch(this.handleError).subscribe();
   }
 
   deleteConversation(conversation: Conversation) {
-      this.http.delete(this._baseUrl + `/api/conversation/${conversation._id}`).catch(this.handleError);
+      this.http.delete(this._baseUrl + `/api/conversation/${conversation._id}`)
+        .map(res => <Conversation>res.json()).catch(this.handleError).subscribe(data => console.log(data));;
   }
 
   private handleError(error: any) {

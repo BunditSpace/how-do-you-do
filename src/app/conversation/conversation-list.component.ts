@@ -3,7 +3,8 @@ import {Component,
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy} from '@angular/core';
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -13,7 +14,8 @@ import { Conversation } from './conversation';
 
 @Component({
   selector: 'conversation-list',
-  templateUrl: './conversation-list.html'
+  templateUrl: './conversation-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConversationList {
   // The `recipe` component hands off `recipes` and `selectedrecipe`
@@ -28,5 +30,12 @@ export class ConversationList {
   constructor() 
   {
       console.log(' list '+this.conversations);
+  }
+
+  public selecteditem: Observable<Object>;
+
+  showModal(item:any, dangerModal:any) {
+    this.selecteditem = item;
+    dangerModal.show();
   }
 }

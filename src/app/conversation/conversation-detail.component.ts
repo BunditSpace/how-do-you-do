@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../auth/services/authentication.service';
 
 import { Component, Input, Output, EventEmitter, Directive } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
@@ -22,23 +23,20 @@ export class ConversationDetail {
     if (value) this.originalTitle = value.topic;
     this.selectedConversation = Object.assign({}, value);
 
+    this.selectedConversation.creator = this.authService.getUserName();
+    this.selectedConversation.date = new Date();
     // DEBUG
     console.log('this.selectedConversation: ');
     console.log(this.selectedConversation);
   }
 
-  // Allow the user to save/delete a `recipe or cancel the
-  // operation. Flow events up from here.
   @Output() saved = new EventEmitter();
   @Output() cancelled = new EventEmitter();
 
-  constructor() {
+  constructor(private authService: AuthenticationService) {
 
   }
   onUpdateRating(value) {
-
-    // Set the value of the selected recipe's rating to the
-    // value passed up from the `rating` component
     this.selectedConversation.rating = value;
   }
 

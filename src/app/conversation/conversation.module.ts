@@ -1,3 +1,4 @@
+import { ModalModule } from 'ng2-bootstrap/modal';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { PagesRoutingModule } from './../pages/pages-routing.module';
@@ -28,7 +29,8 @@ import { StarRatingModule } from 'angular-star-rating';
     HttpModule, 
     FormsModule, 
     CommonModule ,
-    StarRatingModule 
+    StarRatingModule,
+    ModalModule.forRoot() 
   ],
   exports: [RatingComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

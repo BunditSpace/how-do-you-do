@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../auth/services/authentication.service';
 import {Component,
   Input,
   Output,
@@ -25,16 +26,15 @@ export class Conversations implements OnInit {
   conversations: Conversation[];
   errorMessage: string;
 
-  selectedConversation: Observable<Conversation>;
+  selectedConversation: Conversation;
 
   ngOnInit(){
       this.loadConversations();
-      console.log('init '+this.conversations);
   }
 
-  constructor(private conversationService: ConversationService) 
+  constructor(private conversationService: ConversationService, private authService: AuthenticationService) 
   {
-
+      
   }
 
   loadConversations()
@@ -42,11 +42,10 @@ export class Conversations implements OnInit {
      this.conversationService.loadConversations()
           .subscribe(conversation => this.conversations = conversation
                      ,error => this.errorMessage = <any>error);
-                      console.log('loadddd '+this.conversations);
   }
 
   selectConversation(conversation: Conversation) {
-
+    this.selectedConversation = conversation;
   }
 
   deleteConversation(conversation: Conversation) {
@@ -54,9 +53,10 @@ export class Conversations implements OnInit {
   }
 
   resetConversation() {
+    console.log('reset value');
     let emptyConversation: Conversation = {
       _id: null,
-      creator: '',
+      creator: this.authService.getUserName(),
       date: '',
       talkwith: '',
       relationship: '',
@@ -64,13 +64,15 @@ export class Conversations implements OnInit {
       question: '',
       answer: '',
       conversationtype: '',
-      rating: null,
-      feeling: null
+      rating: 0,
+      feeling: 0
     };
-
+    this.selectedConversation = emptyConversation;
   }
 
   saveConversation(conversation: Conversation) {
+    console.log('save value');
+    console.log(conversation);
     this.conversationService.saveConversation(conversation);
     this.resetConversation();
   }

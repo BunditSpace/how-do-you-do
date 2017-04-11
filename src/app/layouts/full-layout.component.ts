@@ -22,9 +22,7 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    let user = localStorage.getItem("currentUser");
-    this.displayname = user;
-    console.log(user);
-    
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.displayname = currentUser.local.username;   
   }
 }
