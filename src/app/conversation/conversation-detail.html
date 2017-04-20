@@ -1,5 +1,5 @@
 <div>
-  <form>
+  <form #coversationDetailForm="ngForm" >
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header">
@@ -19,26 +19,35 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-8">
-            <label for="city">Talk with</label>
-            <input type="text" class="form-control" id="talkwith" [(ngModel)]="selectedConversation.talkwith" name="talkwith" placeholder="Talk with" required>
+          <div class="form-group col-sm-8"  [ngClass]="{'has-danger has-feedback': formErrors.talkwith }">
+            <label for="talkwith">Talk with</label>
+            <input type="text" class="form-control" id="talkwith" [(ngModel)]="selectedConversation.talkwith" name="talkwith" placeholder="Talk with" [ngClass]="{'form-control-danger': formErrors.talkwith }" required>
+            <div *ngIf="formErrors.talkwith" class="alert alert-danger">
+                {{ formErrors.talkwith }}
+            </div>
           </div>
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" [ngClass]="{'has-danger has-feedback': formErrors.relationship }">
             <label for="select">Relationship</label>
               <div>
-                <select id="relationship" name="relationship" [(ngModel)]="selectedConversation.relationship" class="form-control input-lg" size="1" required>
+                <select id="relationship" name="relationship" [(ngModel)]="selectedConversation.relationship" class="form-control input-lg" size="1" [ngClass]="{'form-control-danger': formErrors.relationship }" required>
                   <option *ngFor="let relation of relationships" [value]="relation.name"> 
                       {{relation.name}} 
                   </option>
                 </select>
+                <div *ngIf="formErrors.relationship" class="alert alert-danger">
+                  {{ formErrors.relationship }}
+                </div>
               </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-danger has-feedback': formErrors.topic }">
           <label for="topic">Topic</label>
           <input type="text" class="form-control" id="topic" [(ngModel)]="selectedConversation.topic" name="topic" placeholder="topic" required>
+          <div *ngIf="formErrors.topic" class="alert alert-danger">
+            {{ formErrors.topic }}
+          </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-danger has-feedback': formErrors.conversationtype }">
           <label for="conversationType">Conversation Type</label>
           <div>
             <select id="conversationtype" name="conversationtype" [(ngModel)]="selectedConversation.conversationtype" class="form-control input-lg" size="1" required>
@@ -46,16 +55,25 @@
                     {{conversationtype.name}}
                   </option>
             </select>
+            <div *ngIf="formErrors.conversationtype" class="alert alert-danger">
+              {{ formErrors.conversationtype }}
+            </div>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-6">
+          <div class="form-group col-sm-6" [ngClass]="{'has-danger has-feedback': formErrors.question }">
             <label for="question">Question ? </label>
-            <textarea id="question" name="question" [(ngModel)]="selectedConversation.question" rows="9" class="form-control" placeholder="Question ...?" required></textarea>
+            <textarea id="question" name="question" [(ngModel)]="selectedConversation.question" rows="9" class="form-control" placeholder="Question ...?" [ngClass]="{'form-control-danger': formErrors.question }" required></textarea>
+            <div *ngIf="formErrors.question" class="alert alert-danger">
+              {{ formErrors.question }}
+            </div>
           </div>
-          <div class="form-group col-sm-6">
+          <div class="form-group col-sm-6" [ngClass]="{'has-danger has-feedback': formErrors.answer }">
             <label for="answer">Answer </label>
-            <textarea id="answer" name="answer" [(ngModel)]="selectedConversation.answer" rows="9" class="form-control" placeholder="Answer ..." required></textarea>
+            <textarea id="answer" name="answer" [(ngModel)]="selectedConversation.answer" rows="9" class="form-control" placeholder="Answer ..." [ngClass]="{'form-control-danger': formErrors.answer }" required></textarea>
+            <div *ngIf="formErrors.answer" class="alert alert-danger">
+              {{ formErrors.answer }}
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -70,7 +88,7 @@
         </div>
         <div class="form-group">
           <button type="button" class="btn btn-outline-danger" (click)="cancelled.emit(selectedConversation)"><i class="fa fa-rss"></i>&nbsp; Cancel</button>
-          <button type="submit" class="btn btn-outline-success" (click)="saved.emit(selectedConversation)"><i class="fa fa-magic"></i>&nbsp; Save</button>
+          <button type="submit" class="btn btn-outline-success" (click)="saved.emit(selectedConversation)" [disabled]="!coversationDetailForm.form.valid"><i class="fa fa-magic"></i>&nbsp; Save</button>
         </div>
       </div>
     </div>
