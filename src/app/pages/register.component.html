@@ -4,21 +4,31 @@
       <div class="col-md-6">
         <div class="card mx-2">
           <div class="card-block p-2">
+          <form #registerUserForm="ngForm" >
             <h1>Register</h1>
             <p class="text-muted">Create your account</p>
             <div class="input-group mb-1">
               <span class="input-group-addon"><i class="icon-user"></i></span>
-              <input type="text" class="form-control" placeholder="Username">
+              <input type="text" class="form-control" placeholder="Username" id="username" name="username" [(ngModel)]="model.username" [ngClass]="{'form-control-danger': formErrors.username }" minlength="3" required>
+              <div *ngIf="formErrors.username" class="alert alert-danger">
+                  {{ formErrors.username }}
+              </div>
             </div>
 
             <div class="input-group mb-1">
               <span class="input-group-addon">@</span>
-              <input type="text" class="form-control" placeholder="Email">
+              <input type="text" class="form-control" placeholder="Email" id="email" name="email" [(ngModel)]="model.email" [ngClass]="{'form-control-danger': formErrors.email }" minlength="5" required>
+              <div *ngIf="formErrors.email" class="alert alert-danger">
+                  {{ formErrors.email }}
+              </div>
             </div>
 
             <div class="input-group mb-1">
               <span class="input-group-addon"><i class="icon-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" placeholder="Password" id="password" name="password" [(ngModel)]="model.password" [ngClass]="{'form-control-danger': formErrors.password }" minlength="8" required>
+              <div *ngIf="formErrors.password" class="alert alert-danger">
+                  {{ formErrors.password }}
+              </div>
             </div>
 
             <div class="input-group mb-2">
@@ -26,19 +36,10 @@
               <input type="password" class="form-control" placeholder="Repeat password">
             </div>
 
-            <button type="button" class="btn btn-block btn-success">Create Account</button>
+            <button type="button" class="btn btn-block btn-success" [disabled]="!registerUserForm.form.valid" (click)="registerUser(model)" >Create Account</button>
             <button type="button" class="btn btn-block btn-link" [routerLink]="['/pages/login']">Cancel</button>
+            </form>
           </div>
-          <!--<div class="card-footer p-2">
-            <div class="row">
-              <div class="col-6">
-                <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
-              </div>
-              <div class="col-6">
-                <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-              </div>
-            </div>
-          </div>-->
         </div>
       </div>
     </div>
