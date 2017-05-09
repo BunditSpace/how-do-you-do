@@ -3,12 +3,12 @@ import { LoggedInGuard } from './../auth/services/loggedin.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { Conversations } from './conversation.component';
+import { ConversationDisplay } from './conversation-display.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: Conversations,
+    component: ConversationDisplay,
     data: {
       title: 'Conversation'
     },

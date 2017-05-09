@@ -32,9 +32,9 @@ export class ConversationList {
       console.log(' list '+this.conversations);
   }
 
-  public selecteditem: Observable<Object>;
+  public selecteditem: Conversation;
 
-  showModal(item:any, dangerModal:any) {
+  showModal(item:Conversation, dangerModal:any) {
     this.selecteditem = item;
     dangerModal.show();
   }

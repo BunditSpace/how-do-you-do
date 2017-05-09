@@ -17,11 +17,11 @@ import { ConversationList } from './conversation-list.component';
 @Component({
     selector: 'conversation',
     providers: [ConversationService],
-    templateUrl: './Conversation.html',
+    templateUrl: './Conversation-display.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class Conversations implements OnInit {
+export class ConversationDisplay implements OnInit {
 
   conversations: Conversation[];
   errorMessage: string;

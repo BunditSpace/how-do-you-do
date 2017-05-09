@@ -2,7 +2,7 @@
     <div class="card-block">
     <div>
         <conversation-detail
-            (saved)="saveConversation($event)" (cancelled)="resetConversation($event)"
+            (saved)="saveConversation($event)" (cancelled)="resetConversation()"
             [conversation]="selectedConversation">Pick your Fancy:
         </conversation-detail>
     </div>

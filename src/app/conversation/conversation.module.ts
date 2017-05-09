@@ -10,7 +10,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
 
-import { Conversations } from './conversation.component';
+import { ConversationDisplay } from './conversation-display.component';
 import { ConversationRoutingModule } from './conversation-routing.module';
 import { ConversationService } from './services/conversation.service';
 import { HttpModule } from "@angular/http";
@@ -19,7 +19,6 @@ import { ConversationList } from './conversation-list.component';
 import { ConversationDetail } from './conversation-detail.component';
 import { ConfigService } from './../shared/services/config.service';
 import { CommonModule } from "@angular/common";
-import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
   imports: [
@@ -29,13 +28,12 @@ import { StarRatingModule } from 'angular-star-rating';
     HttpModule, 
     FormsModule, 
     CommonModule ,
-    StarRatingModule,
     ModalModule.forRoot(),
     ReactiveFormsModule
   ],
   exports: [RatingComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ Conversations, ConversationList, ConversationDetail, RatingComponent ],
+  declarations: [ ConversationDisplay, ConversationList, ConversationDetail, RatingComponent ],
   providers: [AuthenticationService, LoggedInGuard, ConversationService, ConfigService],
   
 })
