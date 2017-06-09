@@ -1,3 +1,5 @@
+import { ConversationChartService } from './services/conversationChart.service';
+import { ConversationChart } from './conversation-chart.component';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,8 +35,8 @@ import { CommonModule } from "@angular/common";
   ],
   exports: [RatingComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ ConversationDisplay, ConversationList, ConversationDetail, RatingComponent ],
-  providers: [AuthenticationService, LoggedInGuard, ConversationService, ConfigService],
+  declarations: [ ConversationDisplay, ConversationList, ConversationDetail, RatingComponent, ConversationChart ],
+  providers: [AuthenticationService, LoggedInGuard, ConversationService, ConfigService, ConversationChartService],
   
 })
 export class ConversationModule { }

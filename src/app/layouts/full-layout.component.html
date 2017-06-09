@@ -70,7 +70,15 @@
           Conversation
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/conversation']"><i class="icon-speech"></i> create conversation <span class="badge badge-pill"></span></a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/conversation/create']"><i class="icon-speech"></i> create conversation <span class="badge badge-pill"></span></a>
+        </li>
+        <li class="nav-item nav-dropdown" routerLinkActive="open">
+          <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-graph"></i> Chart</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/conversation/chart']"><i class="icon-pie-chart"></i> chart conversation</a>
+            </li>
+          </ul>
         </li>
         <li class="divider"></li>
         <li class="nav-title">

@@ -1,3 +1,4 @@
+import { ConversationChart } from './conversation-chart.component';
 
 import { LoggedInGuard } from './../auth/services/loggedin.guard';
 import { NgModule } from '@angular/core';
@@ -8,20 +9,26 @@ import { ConversationDisplay } from './conversation-display.component';
 const routes: Routes = [
   {
     path: '',
-    component: ConversationDisplay,
     data: {
       title: 'Conversation'
     },
-     canActivate:[LoggedInGuard]
-    // ,children: [
-    //   {
-    //     path: 'con',
-    //     component: Conversations,
-    //     data: {
-    //       title: 'Page 404'
-    //     }
-    //   }
-    // ]
+    children: [
+      {
+        path: 'create',
+        component: ConversationDisplay,
+        data: {
+          title: 'Conversation'
+        }
+      },
+      {
+        path: 'chart',
+        component: ConversationChart,
+        data: {
+          title: 'Conversation Chart'
+        }
+      }
+    ]
+    , canActivate:[LoggedInGuard]
   }
 ];
 

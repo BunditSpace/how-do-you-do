@@ -22,6 +22,8 @@ import recipeRoutes from './routes/_recipe.router.js';
 
 import conversationRoutes from './routes/_conversation.router.js';
 
+import conversationChartRoutes from './routes/_conversationChart.router.js';
+
 export default (app, router, passport) => {
 
   // ### Express Middlware to use for all requests
@@ -73,6 +75,7 @@ export default (app, router, passport) => {
 
   conversationRoutes(app, router);
 
+  conversationChartRoutes(app, router);
 	// All of our routes will be prefixed with /api
 	app.use('/api', router);
 
