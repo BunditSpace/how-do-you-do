@@ -8,7 +8,7 @@
     </div>
     </div>
     <div class="card-block">
-    <div>
+    <div *ngIf="conversations">
         <conversation-list [conversations]="conversations"
             (selected)="selectConversation($event)" (deleted)="deleteConversation($event)">
         </conversation-list>

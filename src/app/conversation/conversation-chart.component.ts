@@ -2,20 +2,32 @@ import { ConversationChartModel } from './converstaionChartModel';
 import { Observable } from 'rxjs/Observable';
 import { ConversationChartService } from './services/conversationChart.service';
 import { AuthenticationService } from './../auth/services/authentication.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { BaseChartDirective } from "ng2-charts";
 
 @Component({
   templateUrl: 'conversation-chart.html'
 })
-export class ConversationChart {
+export class ConversationChart implements OnInit {
+
+  ngOnInit(): void {
+    let tempPieChartLabels = [];
+    let tempPieChartData = [];
+    this.chartService.getConversationChartLabel(this.authService.getUserName()).subscribe(conversationChart => 
+    {
+        for (let entry of conversationChart) {
+            tempPieChartLabels.push(entry._id); 
+            tempPieChartData.push(entry.totalCount); 
+        }
+    }, error => this.errorMessage = <any>error);
+      this.pieChartLabels = tempPieChartLabels;
+      this.pieChartData = tempPieChartData;
+  }
 
   // Pie
-  public pieChartLabels: string[] = [];
-  public pieChartData: number[] = [];
+  public pieChartLabels: string[] = ["","",""];
+  public pieChartData: number[] = [1,1,1];
   public pieChartType: string = 'pie';
-
-  public chartData: ConversationChartModel[];
   errorMessage: string;
 
    @ViewChild(BaseChartDirective) private _chart;
@@ -35,15 +47,7 @@ export class ConversationChart {
 
   public generateChart()
   {
-    this.pieChartLabels = [];
-    this.pieChartData = [];
-    this.chartService.getConversationChartLabel(this.authService.getUserName()).subscribe(conversationChart => 
-    {
-        for (let entry of conversationChart) {
-            this.pieChartLabels.push(entry._id); 
-            this.pieChartData.push(entry.totalCount); 
-        }
-    }, error => this.errorMessage = <any>error);
-    this._chart.refresh();
+
+      this._chart.refresh();
   }
 }

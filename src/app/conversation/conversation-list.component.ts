@@ -3,7 +3,8 @@ import {Component,
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  OnInit
 } from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
@@ -17,7 +18,12 @@ import { Conversation } from './conversation';
   templateUrl: './conversation-list.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConversationList {
+export class ConversationList implements OnInit{
+
+  ngOnInit(): void {
+
+  }
+
   // The `recipe` component hands off `recipes` and `selectedrecipe`
   // via property bindings to its child components
   // Here we pick up the `recipes` collection by annotating our local
@@ -29,7 +35,7 @@ export class ConversationList {
 
   constructor() 
   {
-      console.log(' list '+this.conversations);
+
   }
 
   public selecteditem: Conversation;
