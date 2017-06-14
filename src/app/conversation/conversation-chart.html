@@ -2,11 +2,19 @@
   <div class="card-columns cols-5">
     <div class="card">
       <div class="card-header">
-          Who is Popular 
-         <button type="button" class="btn btn-outline-primary" (click)="generateChart()"><i class="fa fa-rss"></i>&nbsp; Generate Chart</button>
-        <div class="card-actions">
-         
+        <div class="card-block">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12"> <h2> Who is Popular </h2>  </div>
         </div>
+        <div class="row">
+          <div class="col-sm-6 col-lg-6"> 
+            <button type="button" class="btn btn-outline-primary" (click)="generateChart()"><i class="fa fa-rss"></i>&nbsp; Generate Chart</button>
+          </div>
+          <div class="col-sm-6 col-lg-6">
+                <span><h3 class="animated infinite lightSpeedIn">{{maxValue}}</h3></span> 
+          </div>
+        </div>
+      </div>
       </div>
       <div class="card-block">
         <div class="chart-wrapper">
@@ -22,3 +30,4 @@
     </div>
   </div>
 </div>
+

@@ -25,6 +25,10 @@ export class ConversationService {
       this._baseUrl = config.getApiURI();
   }
 
+  loadConversationsByUser(creator: string): Observable<Conversation[]>{
+      return this.http.get(this._baseUrl + '/api/conversationByUser/'+ `${creator}`)
+           .map(res => <Conversation[]>res.json()).catch(this.handleError);
+  }
   loadConversations(): Observable<Conversation[]>  {
       return this.http.get(this._baseUrl + '/api/conversation')
            .map(res => <Conversation[]>res.json()).do(data => console.log('All: ' +  JSON.stringify(data))).catch(this.handleError);

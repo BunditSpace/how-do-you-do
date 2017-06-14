@@ -19,9 +19,8 @@ import { Conversation } from './conversation';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConversationList implements OnInit{
-  
   ngOnInit(): void {
-
+    
   }
 
   // The `recipe` component hands off `recipes` and `selectedrecipe`

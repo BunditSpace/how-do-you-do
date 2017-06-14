@@ -15,10 +15,14 @@ export class ConversationChart implements OnInit {
     let tempPieChartData = [];
     this.chartService.getConversationChartLabel(this.authService.getUserName()).subscribe(conversationChart => 
     {
+      let max = 0;
         for (let entry of conversationChart) {
             tempPieChartLabels.push(entry._id); 
             tempPieChartData.push(entry.totalCount); 
+            if(max < entry.totalCount)
+                max = entry.totalCount;
         }
+        this.maxValue = tempPieChartLabels[tempPieChartData.indexOf(max)];
     }, error => this.errorMessage = <any>error);
       this.pieChartLabels = tempPieChartLabels;
       this.pieChartData = tempPieChartData;
@@ -27,7 +31,9 @@ export class ConversationChart implements OnInit {
   // Pie
   public pieChartLabels: string[] = ["","",""];
   public pieChartData: number[] = [1,1,1];
-  public pieChartType: string = 'pie';
+  public pieChartType: string = 'doughnut';
+  public maxValue: string = "";
+  public hasData: boolean = false;
   errorMessage: string;
 
    @ViewChild(BaseChartDirective) _chart;
@@ -47,7 +53,7 @@ export class ConversationChart implements OnInit {
 
   public generateChart()
   {
-
+      this.hasData = true;
       this._chart.refresh();
   }
 }

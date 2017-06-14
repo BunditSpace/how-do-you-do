@@ -182,4 +182,15 @@ export default (app, router) => {
         });
       });
     });
+
+   router.route('/conversationByUser/:creator')
+   .get((req, res) => {
+      Conversation.find({ "creator" : req.params.creator }, (err, conversations) => {
+        if(err)
+          res.send(err);
+
+        else
+          res.json(conversations);
+      });
+    });
 };

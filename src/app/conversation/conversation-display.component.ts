@@ -39,9 +39,9 @@ export class ConversationDisplay implements OnInit {
 
   public loadConversations()
   {
-     this.conversationService.loadConversations()
-          .subscribe(conversation => this.conversations = conversation
-                     ,error => this.errorMessage = <any>error);
+      this.conversationService.loadConversationsByUser(this.authService.getUserName())
+           .subscribe(conversation => this.conversations = conversation
+                      ,error => this.errorMessage = <any>error);
   }
 
   selectConversation(conversation: Conversation) {
