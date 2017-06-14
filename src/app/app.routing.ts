@@ -19,6 +19,10 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+       {
+        path: 'authen',
+        loadChildren: './auth/authen.module#AuthenModule'
+      },
       {
         path: 'dashboard',
         loadChildren: './dashboard/dashboard.module#DashboardModule'

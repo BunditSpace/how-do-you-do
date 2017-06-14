@@ -37,7 +37,7 @@ export class ConversationDisplay implements OnInit {
       
   }
 
-  loadConversations()
+  public loadConversations()
   {
      this.conversationService.loadConversations()
           .subscribe(conversation => this.conversations = conversation

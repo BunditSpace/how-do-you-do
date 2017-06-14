@@ -28,6 +28,7 @@
     </li>-->
     <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
+        <span> {{displayemail}} </span>
         <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
         <span class="hidden-md-down">{{displayname}}</span>
       </a>
@@ -48,7 +49,7 @@
         <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
         <div class="divider"></div>
         <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a>-->
-        <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+        <a class="dropdown-item" routerLinkActive="active" [routerLink]="['/authen/logout']" ><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
     <!--<li class="nav-item hidden-md-down">
@@ -81,7 +82,7 @@
           </ul>
         </li>
         <li class="divider"></li>
-        <li class="nav-title">
+        <!--<li class="nav-title">
           UI Elements
         </li>
         <li class="nav-item nav-dropdown" routerLinkActive="open">
@@ -150,7 +151,7 @@
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/500']"><i class="icon-star"></i> Error 500</a>
             </li>
           </ul>
-        </li>
+        </li>-->
         
       </ul>
     </nav>

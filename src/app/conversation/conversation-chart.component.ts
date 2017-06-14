@@ -30,7 +30,7 @@ export class ConversationChart implements OnInit {
   public pieChartType: string = 'pie';
   errorMessage: string;
 
-   @ViewChild(BaseChartDirective) private _chart;
+   @ViewChild(BaseChartDirective) _chart;
 
   constructor(private authService: AuthenticationService, private chartService: ConversationChartService) {
      
