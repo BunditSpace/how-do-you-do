@@ -3,7 +3,7 @@ import {Component,
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy, OnInit
+  ChangeDetectionStrategy, OnInit, ViewChild
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -16,9 +16,7 @@ import { ConversationList } from './conversation-list.component';
 
 @Component({
     selector: 'conversation',
-    providers: [ConversationService],
-    templateUrl: './Conversation-display.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './Conversation-display.html'
 })
 
 export class ConversationDisplay implements OnInit {
@@ -27,8 +25,10 @@ export class ConversationDisplay implements OnInit {
   errorMessage: string;
 
   selectedConversation: Conversation;
+  @ViewChild(ConversationList) conList : ConversationList;
 
   ngOnInit(){
+     
       this.loadConversations();
   }
 
@@ -39,9 +39,11 @@ export class ConversationDisplay implements OnInit {
 
   public loadConversations()
   {
-      this.conversationService.loadConversationsByUser(this.authService.getUserName())
-           .subscribe(conversation => this.conversations = conversation
-                      ,error => this.errorMessage = <any>error);
+    setTimeout(() => {this.conversationService.loadConversationsByUser(this.authService.getUserName())
+           .subscribe(conversation => {
+           this.conversations = conversation;
+          } ,error => this.errorMessage = <any>error);});
+      
   }
 
   selectConversation(conversation: Conversation) {
@@ -53,7 +55,6 @@ export class ConversationDisplay implements OnInit {
   }
 
   resetConversation() {
-    console.log('reset value');
     let emptyConversation: Conversation = {
       _id: null,
       creator: this.authService.getUserName(),
@@ -71,8 +72,6 @@ export class ConversationDisplay implements OnInit {
   }
 
   saveConversation(conversation: Conversation) {
-    console.log('save value');
-    console.log(conversation);
     this.conversationService.saveConversation(conversation);
     this.resetConversation();
   }

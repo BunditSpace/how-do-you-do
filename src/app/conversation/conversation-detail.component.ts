@@ -26,9 +26,6 @@ export class ConversationDetail {
 
     this.selectedConversation.creator = this.authService.getUserName();
     this.selectedConversation.date = new Date();
-    // DEBUG
-    console.log('this.selectedConversation: ');
-    console.log(this.selectedConversation);
   }
 
   @Output() saved = new EventEmitter();
