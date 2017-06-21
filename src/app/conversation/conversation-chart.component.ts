@@ -53,7 +53,10 @@ export class ConversationChart implements OnInit {
 
   public generateChart()
   {
-      this.hasData = true;
-      this._chart.refresh();
+      if(this.pieChartLabels.length > 0)
+      {
+        this.hasData = true;
+        this._chart.refresh();
+      }
   }
 }

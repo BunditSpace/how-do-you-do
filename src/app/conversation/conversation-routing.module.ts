@@ -1,4 +1,4 @@
-import { ConversationSearchComponent } from './conversation-searh.component';
+import { ConversationSearchComponent } from './conversation-search.component';
 import { ConversationChart } from './conversation-chart.component';
 
 import { LoggedInGuard } from './../auth/services/loggedin.guard';

@@ -1,6 +1,6 @@
 import {DataTableModule} from "angular2-datatable";
 import { ConversationListModule } from './conversation-list.module';
-import { ConversationSearchComponent } from './conversation-searh.component';
+import { ConversationSearchComponent } from './conversation-search.component';
 import { ConversationChartService } from './services/conversationChart.service';
 import { ConversationChart } from './conversation-chart.component';
 import { ModalModule } from 'ng2-bootstrap/modal';
