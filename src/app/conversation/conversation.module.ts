@@ -13,7 +13,7 @@ import { LoggedInGuard } from './../auth/services/loggedin.guard';
 import { AuthenticationService } from './../auth/services/authentication.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { DropdownModule } from 'ng2-bootstrap/dropdown';
+import { BsDropdownModule } from 'ng2-bootstrap/dropdown';
 
 import { ConversationDisplay } from './conversation-display.component';
 import { ConversationRoutingModule } from './conversation-routing.module';
@@ -30,7 +30,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   imports: [
     ConversationRoutingModule,
     ChartsModule,
-    DropdownModule,
+    BsDropdownModule,
     HttpModule, 
     FormsModule, 
     CommonModule ,

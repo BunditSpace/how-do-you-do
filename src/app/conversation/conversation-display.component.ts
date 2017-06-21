@@ -16,7 +16,7 @@ import { ConversationList } from './conversation-list.component';
 
 @Component({
     selector: 'conversation',
-    templateUrl: './Conversation-display.html'
+    templateUrl: './conversation-display.html'
 })
 
 export class ConversationDisplay implements OnInit {

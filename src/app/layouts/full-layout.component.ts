@@ -13,7 +13,7 @@ export class FullLayoutComponent implements OnInit {
   public displayemail: string;
 
   public toggled(open: boolean): void {
-    console.log('Dropdown is now: ', open);
+    console.log(open);
   }
 
   public toggleDropdown($event: MouseEvent): void {
@@ -22,6 +22,11 @@ export class FullLayoutComponent implements OnInit {
     this.status.isopen = !this.status.isopen;
   }
 
+  constructor()
+  {
+
+  }
+  
   ngOnInit(): void 
   {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
