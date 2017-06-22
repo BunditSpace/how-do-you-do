@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ConversationDisplay } from './conversation-display.component';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 const routes: Routes = [
   {
